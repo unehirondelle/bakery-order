@@ -14,12 +14,23 @@ app.engine("handlebars", exprhnlbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 const cakes = [
-    {name: "Honey Cake", layers: "special honey crust", filling: "whipped condensed milk", size: 8, price: 50},
-    {name: "Black Forest", layers: "chocolate", filling: "whipped sour cherry cream", size: 6, price: 30},
-    {name: "Vanilla Berry", layers: "vanilla", filling: "berry mousse", size: 6, price: 30}
+    {route: "honey-cake", name: "Honey Cake", layers: "special honey crust", filling: "whipped condensed milk", size: 8, price: 50},
+    {route: "black-forest", name: "Black Forest", layers: "chocolate", filling: "whipped sour cherry cream", size: 6, price: 30},
+    {route: "vanilla-berry", name: "Vanilla Berry", layers: "vanilla", filling: "berry mousse", size: 6, price: 30}
 ];
 
+app.get("/cakes", (req, res) => {
+    console.log(res);
+    res.render("cakes", {cakelist: cakes});
+});
 
+app.get("/cakes/:route", (req, res) => {
+    for (let i=0; i<cakes.length; i++) {
+        if(cakes[i].name === req.params.name) {
+            return res.render("cake-name", cakes[i]);
+        }
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server is listening on: http://localhost: ${PORT}`);
