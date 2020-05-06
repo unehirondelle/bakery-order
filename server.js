@@ -20,13 +20,13 @@ const cakes = [
 ];
 
 app.get("/cakes", (req, res) => {
-    console.log(res);
+    // console.log(res);
     res.render("cakes", {cakelist: cakes});
 });
 
 app.get("/cakes/:route", (req, res) => {
     for (let i=0; i<cakes.length; i++) {
-        if(cakes[i].name === req.params.name) {
+        if(cakes[i].route === req.params.route) {
             return res.render("cake-name", cakes[i]);
         }
     }
