@@ -14,9 +14,30 @@ app.engine("handlebars", exprhnlbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 const cakes = [
-    {route: "honey-cake", name: "Honey Cake", layers: "special honey crust", filling: "whipped condensed milk", size: 8, price: 50},
-    {route: "black-forest", name: "Black Forest", layers: "chocolate", filling: "whipped sour cherry cream", size: 6, price: 30},
-    {route: "vanilla-berry", name: "Vanilla Berry", layers: "vanilla", filling: "berry mousse", size: 6, price: 30}
+    {
+        route: "honey-cake",
+        name: "Honey Cake",
+        layers: "special honey crust",
+        filling: "whipped condensed milk",
+        size: 8,
+        price: 50
+    },
+    {
+        route: "black-forest",
+        name: "Black Forest",
+        layers: "chocolate",
+        filling: "whipped sour cherry cream",
+        size: 6,
+        price: 30
+    },
+    {
+        route: "vanilla-berry",
+        name: "Vanilla Berry",
+        layers: "vanilla",
+        filling: "berry mousse",
+        size: 6,
+        price: 30
+    }
 ];
 
 app.get("/cakes", (req, res) => {
@@ -25,11 +46,7 @@ app.get("/cakes", (req, res) => {
 });
 
 app.get("/cakes/:route", (req, res) => {
-    for (let i=0; i<cakes.length; i++) {
-        if(cakes[i].route === req.params.route) {
-            return res.render("cake-name", cakes[i]);
-        }
-    }
+    cakes.forEach(cake => cake.route === req.params.route ? res.render("cake-name", cake) : console.log("There is no such cake"));
 });
 
 app.listen(PORT, () => {
