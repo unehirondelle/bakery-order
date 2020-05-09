@@ -9,5 +9,6 @@ create table cakes
     layers  varchar(30) not null,
     filling varchar(30) not null,
     size    int         not null,
-    price   int         not null
+    price   int         not null,
+    route   varchar(30) not null
 );

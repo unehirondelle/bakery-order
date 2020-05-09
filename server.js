@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3010;
 
 //middleware to transform the request so the data that was sent on req.body could be read
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 //parses incoming requests with JSON payloads and is based on body-parser
 //returns middleware that only parses JSON and only looks at requests where the Content-Type header matches the type option.
 app.use(express.json());
@@ -31,46 +31,30 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
     if (err) {
-        console.error("error connecting: " + err.stack);
+        console.error(`error connecting: ${err.stack}`);
         return;
     }
-    console.log("connection as id " + connection.threadId);
+    console.log(`connection as id ${connection.threadId}`);
 });
-
-const cakes = [
-    {
-        route: "honey-cake",
-        name: "Honey Cake",
-        layers: "special honey crust",
-        filling: "whipped condensed milk",
-        size: 8,
-        price: 50
-    },
-    {
-        route: "black-forest",
-        name: "Black Forest",
-        layers: "chocolate",
-        filling: "whipped sour cherry cream",
-        size: 6,
-        price: 30
-    },
-    {
-        route: "vanilla-berry",
-        name: "Vanilla Berry",
-        layers: "vanilla",
-        filling: "berry mousse",
-        size: 6,
-        price: 30
-    }
-];
 
 app.get("/cakes", (req, res) => {
-    // console.log(res);
-    res.render("cakes", {cakelist: cakes});
+    const sql = "select * from cakes;"
+    connection.query(sql, (err, data) => {
+        if (err) throw err;
+        console.log(data);
+        res.render("cakes", {cakelist: data});
+    });
 });
 
-app.get("/cakes/:route", (req, res) => {
-    cakes.forEach(cake => cake.route === req.params.route ? res.render("cake-name", cake):console.log("There is no such cake"));
+app.get("/cakes/:cakeName", (req, res) => {
+    const sql = `select * from cakes where route="${req.params.cakeName}"`;
+    console.log("", req.params, sql);
+    connection.query(sql, (err, data) => {
+        if (err) throw err;
+        data.forEach(cake => {
+            res.render("cake-name", cake);
+        });
+    });
 });
 
 app.listen(PORT, () => {
