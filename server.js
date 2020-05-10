@@ -48,7 +48,6 @@ app.get("/cakes", (req, res) => {
 
 app.get("/cakes/:cakeName", (req, res) => {
     const sql = `select * from cakes where route="${req.params.cakeName}"`;
-    console.log("", req.params, sql);
     connection.query(sql, (err, data) => {
         if (err) throw err;
         data.forEach(cake => {
@@ -56,6 +55,22 @@ app.get("/cakes/:cakeName", (req, res) => {
         });
     });
 });
+
+const cart = {};
+
+app.post('/order', function (req, res) {
+    // console.log(req.body);
+    const id = req.body.id;
+    if (!cart[id]) {
+        cart[id] = {};
+        cart[id]["quantity"] = req.body.quantity;
+        cart[id]["comment"] = req.body.comment;
+    } else {
+        cart[id]["quantity"] = req.body.quantity;
+        cart[id]["comment"] = req.body.comment;
+    }
+    res.send(cart);
+})
 
 app.listen(PORT, () => {
     console.log(`Server is listening on: http://localhost: ${PORT}`);

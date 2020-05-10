@@ -1,8 +1,23 @@
 <h2>{{name}}</h2>
+
+
 <p>Layers: {{layers}}</p>
 <p>Filling: {{filling}}</p>
 <p>Size: {{size}} in</p>
 <p>Price: ${{price}}</p>
-<br>
+
+<form action="/order" method="post">
+    <input type="hidden" name="id" value={{id}}><br>
+    <label for="quantity">Quantity:</label><br>
+    <select id="quantity" name="quantity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+    <br>
+    <label for="comment">Your comment:</label><br>
+    <textarea id="comment" type="text" name="comment"></textarea><br>
+    <button type="submit">Order</button>
+</form>
 
 
