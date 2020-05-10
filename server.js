@@ -63,13 +63,19 @@ app.post('/order', function (req, res) {
     const id = req.body.id;
     if (!cart[id]) {
         cart[id] = {};
-        cart[id]["quantity"] = req.body.quantity;
-        cart[id]["comment"] = req.body.comment;
-    } else {
-        cart[id]["quantity"] = req.body.quantity;
-        cart[id]["comment"] = req.body.comment;
     }
-    res.send(cart);
+    cart[id].quantity = req.body.quantity;
+    cart[id].comment = req.body.comment;
+
+    const allId = Object.keys(cart);
+    const sql = "select * from cakes where id in (?)";
+    connection.query(sql, [allId],(err, data) => {
+        if (err) throw err;
+        data.forEach(cake => {
+            res.render("cart", {orderlist: data});
+        });
+    });
+    // res.send(cart);
 })
 
 app.listen(PORT, () => {
