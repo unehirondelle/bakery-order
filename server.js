@@ -41,7 +41,6 @@ app.get("/cakes", (req, res) => {
     const sql = "select * from cakes;"
     connection.query(sql, (err, data) => {
         if (err) throw err;
-        console.log(data);
         res.render("cakes", {cakelist: data});
     });
 });
@@ -59,7 +58,6 @@ app.get("/cakes/:cakeName", (req, res) => {
 const cart = {};
 
 app.post('/order', function (req, res) {
-    // console.log(req.body);
     const id = req.body.id;
     if (!cart[id]) {
         cart[id] = {};
@@ -69,14 +67,15 @@ app.post('/order', function (req, res) {
 
     const allId = Object.keys(cart);
     const sql = "select * from cakes where id in (?)";
-    connection.query(sql, [allId],(err, data) => {
+    connection.query(sql, [allId], (err, data) => {
         if (err) throw err;
         data.forEach(cake => {
-            res.render("cart", {orderlist: data});
+            cake.quantity = cart[cake.id].quantity;
+            cake.comment = cart[cake.id].comment;
         });
+        res.render("cart", {orderlist: data});
     });
-    // res.send(cart);
-})
+});
 
 app.listen(PORT, () => {
     console.log(`Server is listening on: http://localhost: ${PORT}`);
