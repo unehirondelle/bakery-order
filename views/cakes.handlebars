@@ -1,18 +1,30 @@
-<h1>We're happy to share our lovely cakes with you:</h1>
-{{#each cakelist}}
-    <a href="/cakes/{{route}}">{{name}}</a>
-    <p>Price: ${{price}}</p>
-    <form action="/order" method="post">
-        <input type="hidden" name="id" value={{id}}><br>
-        <label for="quantity">Quantity:</label><br>
-        <select id="quantity" name="quantity">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>
-        <br>
-        <label for="comment">Your comment:</label><br>
-        <textarea id="comment" type="text" name="comment"></textarea><br>
-        <button type="submit">Order</button>
-    </form>
-{{/each}}
+<div class="jumbotron jumbotron-fluid">
+    <h1 class="display-4">We're happy to share our lovely cakes with you:</h1>
+</div>
+<div class="container">
+    <div class="row">
+        {{#each cakelist}}
+            <div class="col mb-3">
+                <div class="card text-center">
+                    <img src="../assets/{{route}}.jpg" class="card-img-top" alt="Picture of {{route}}">
+                    <div class="card-body">
+                        <a class="btn btn-info w-100" href="/cakes/{{route}}">{{name}}</a>
+                        <p class="lead">Price: ${{price}}</p>
+                        <form action="/order" method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="hidden" name="id" value={{id}}><br>
+                                <label for="quantity">Quantity:</label><br>
+                                <input class="form-control" type="number" id="quantity" name="quantity" value="0" min="1" max="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Your comment:</label><br>
+                                <textarea class="form-control" id="comment" type="text" name="comment"></textarea><br>
+                            </div>
+                            <button class="btn btn-danger w-100" type="submit">Order</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

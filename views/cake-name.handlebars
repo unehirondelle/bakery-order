@@ -1,23 +1,32 @@
-<h2>{{name}}</h2>
+<div class="container">
+    <h2 class="text-center">{{name}}</h2>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="card text-center">
+                <img src="../assets/{{route}}.jpg" class="card-img-top" alt="Picture of {{route}}">
+                <div class="card-body">
+                    <div class="form-group">
+                        <p class="lead">Layers: {{layers}}</p>
+                        <p class="lead">Filling: {{filling}}</p>
+                        <p class="lead">Size: {{size}} in</p>
+                        <p class="lead">Price: ${{price}}</p>
 
-
-<p>Layers: {{layers}}</p>
-<p>Filling: {{filling}}</p>
-<p>Size: {{size}} in</p>
-<p>Price: ${{price}}</p>
-
-<form action="/order" method="post">
-    <input type="hidden" name="id" value={{id}}><br>
-    <label for="quantity">Quantity:</label><br>
-    <select id="quantity" name="quantity">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-    </select>
-    <br>
-    <label for="comment">Your comment:</label><br>
-    <textarea id="comment" type="text" name="comment"></textarea><br>
-    <button type="submit">Order</button>
-</form>
-<a href="/cakes"><button>Back to cakes list</button></a>
-
+                        <form action="/order" method="post">
+                            <input class="form-control" type="hidden" name="id" value={{id}}><br>
+                            <label for="quantity">Quantity:</label><br>
+                            <input class="form-control" type="number" id="quantity" name="quantity" value="0" min="1"
+                                   max="5">
+                            <br>
+                            <label for="comment">Your comment:</label><br>
+                            <textarea class="form-control" id="comment" type="text" name="comment"></textarea><br>
+                            <button class="btn btn-danger w-100 mb-3" type="submit">Order</button>
+                        </form>
+                        <a href="/cakes">
+                            <button class="btn btn-info">Back to cakes list</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

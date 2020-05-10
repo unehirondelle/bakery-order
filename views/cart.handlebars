@@ -1,13 +1,13 @@
 <h1>Your order:</h1>
 
-<table>
-    <th>
-    <td>Name</td>
-    <td>Size</td>
-    <td>Quantity</td>
-    <td>Price</td>
-    <td>Your Comment</td>
-    </th>
+<table class="table table-striped">
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Size</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Your Comment</th>
+    </tr>
     {{#each orderlist}}
         <tr>
             <td>{{name}}</td>
@@ -18,4 +18,6 @@
         </tr>
     {{/each}}
 </table>
-<a href="/cakes"><button>Back to cakes list</button></a>
+<a href="/cakes">
+    <button class="btn btn-info">Back to cakes list</button>
+</a>
