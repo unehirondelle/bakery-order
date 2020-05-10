@@ -6,6 +6,7 @@
         <th scope="col">Size</th>
         <th scope="col">Quantity</th>
         <th scope="col">Price</th>
+        <th scope="col">Total</th>
         <th scope="col">Your Comment</th>
     </tr>
     {{#each orderlist}}
@@ -14,6 +15,7 @@
             <td>{{size}}in</td>
             <td>{{quantity}}</td>
             <td>${{price}}</td>
+            <td>${{total}}</td>
             <td>{{comment}}</td>
         </tr>
     {{/each}}

@@ -71,6 +71,7 @@ app.post('/order', function (req, res) {
         if (err) throw err;
         data.forEach(cake => {
             cake.quantity = cart[cake.id].quantity;
+            cake.total = parseInt(cart[cake.id].quantity)*parseInt(cake.price);
             cake.comment = cart[cake.id].comment;
         });
         res.render("cart", {orderlist: data});
