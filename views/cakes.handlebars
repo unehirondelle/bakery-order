@@ -1,14 +1,14 @@
 <div class="jumbotron jumbotron-fluid">
-    <h1 class="display-4">We're happy to share our lovely cakes with you:</h1>
+    <h1 class="display-4 text-center">We're happy to share our lovely cakes with you:</h1>
 </div>
 <div class="container">
     <div class="row">
         {{#each cakelist}}
             <div class="col mb-3">
                 <div class="card text-center">
-                    <img src="../assets/{{route}}.jpg" class="card-img-top" alt="Picture of {{route}}">
+                    <img src="images/{{route}}.jpg" class="card-img-top" alt="Picture of {{route}}">
                     <div class="card-body">
-                        <a class="btn btn-info w-100" href="/cakes/{{route}}">{{name}}</a>
+                        <a class="btn btn-info w-100" href="/cakes/{{route}}"><h4>{{name}}</h4></a>
                         <p class="lead">Price: ${{price}}</p>
                         <form action="/order" method="post">
                             <div class="form-group">

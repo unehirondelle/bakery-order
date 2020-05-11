@@ -7,8 +7,11 @@ const app = express();
 
 const PORT = process.env.PORT || 3010;
 
+app.use(express.static(__dirname + "/public"));
+
 //middleware to transform the request so the data that was sent on req.body could be read
 app.use(express.urlencoded({extended: true}));
+
 //parses incoming requests with JSON payloads and is based on body-parser
 //returns middleware that only parses JSON and only looks at requests where the Content-Type header matches the type option.
 app.use(express.json());
@@ -41,6 +44,7 @@ app.get("/cakes", (req, res) => {
     const sql = "select * from cakes;"
     connection.query(sql, (err, data) => {
         if (err) throw err;
+        // res.sendFile(__dirname + '/views/cakes.handlebars');
         res.render("cakes", {cakelist: data});
     });
 });
@@ -49,7 +53,9 @@ app.get("/cakes/:cakeName", (req, res) => {
     const sql = `select * from cakes where route="${req.params.cakeName}"`;
     connection.query(sql, (err, data) => {
         if (err) throw err;
+
         data.forEach(cake => {
+            // res.sendFile(__dirname + '/views/cake-name.handlebars');
             res.render("cake-name", cake);
         });
     });

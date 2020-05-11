@@ -8,6 +8,7 @@
         <th scope="col">Price</th>
         <th scope="col">Total</th>
         <th scope="col">Your Comment</th>
+        <th scope="col"></th>
     </tr>
     {{#each orderlist}}
         <tr>
@@ -17,6 +18,7 @@
             <td>${{price}}</td>
             <td>${{total}}</td>
             <td>{{comment}}</td>
+            <td><button class="btn btn-info" id="{{id}}">Delete</button></td>
         </tr>
     {{/each}}
 </table>
