@@ -6,7 +6,7 @@
         {{#each cakelist}}
             <div class="col mb-3">
                 <div class="card text-center">
-                    <img src="images/{{route}}.jpg" class="card-img-top" alt="Picture of {{route}}">
+                    <img src="/images/{{route}}.jpg" class="card-img-top" alt="Picture of {{route}}">
                     <div class="card-body">
                         <a class="btn btn-info w-100" href="/cakes/{{route}}"><h4>{{name}}</h4></a>
                         <p class="lead">Price: ${{price}}</p>
@@ -14,7 +14,8 @@
                             <div class="form-group">
                                 <input class="form-control" type="hidden" name="id" value={{id}}><br>
                                 <label for="quantity">Quantity:</label><br>
-                                <input class="form-control" type="number" id="quantity" name="quantity" value="0" min="1" max="5">
+                                <input class="form-control" type="number" id="quantity" name="quantity" value="0"
+                                       min="1" max="5">
                             </div>
                             <div class="form-group">
                                 <label for="comment">Your comment:</label><br>

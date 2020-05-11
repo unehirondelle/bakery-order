@@ -44,7 +44,6 @@ app.get("/cakes", (req, res) => {
     const sql = "select * from cakes;"
     connection.query(sql, (err, data) => {
         if (err) throw err;
-        // res.sendFile(__dirname + '/views/cakes.handlebars');
         res.render("cakes", {cakelist: data});
     });
 });
@@ -53,11 +52,7 @@ app.get("/cakes/:cakeName", (req, res) => {
     const sql = `select * from cakes where route="${req.params.cakeName}"`;
     connection.query(sql, (err, data) => {
         if (err) throw err;
-
-        data.forEach(cake => {
-            // res.sendFile(__dirname + '/views/cake-name.handlebars');
-            res.render("cake-name", cake);
-        });
+        res.render("cake-name", data[0]);
     });
 });
 
@@ -77,7 +72,7 @@ app.post('/order', function (req, res) {
         if (err) throw err;
         data.forEach(cake => {
             cake.quantity = cart[cake.id].quantity;
-            cake.total = parseInt(cart[cake.id].quantity)*parseInt(cake.price);
+            cake.total = parseInt(cart[cake.id].quantity) * parseInt(cake.price);
             cake.comment = cart[cake.id].comment;
         });
         res.render("cart", {orderlist: data});
