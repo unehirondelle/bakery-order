@@ -52,7 +52,7 @@ app.get("/cakes/:cakeName", (req, res) => {
     const sql = `select * from cakes where route="${req.params.cakeName}"`;
     connection.query(sql, (err, data) => {
         if (err) throw err;
-        res.render("cake-name", data[0]);
+        res.render("cake-name", data);
     });
 });
 
