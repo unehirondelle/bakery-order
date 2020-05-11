@@ -71,7 +71,7 @@ app.post('/order', function (req, res) {
     connection.query(sql, [allId], (err, data) => {
         if (err) throw err;
         data.forEach(cake => {
-            cake.quantity = cart[cake.id].quantity;
+            cake.quantity = cart[cake].quantity;
             cake.total = parseInt(cart[cake.id].quantity) * parseInt(cake.price);
             cake.comment = cart[cake.id].comment;
         });
