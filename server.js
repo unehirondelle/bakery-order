@@ -48,7 +48,7 @@ app.get("/", (req, res) => {
     });
 });
 
-app.get("/cakes/:cakeName", (req, res) => {
+app.get("/:cakeName", (req, res) => {
     const sql = `select * from cakes where route="${req.params.cakeName}"`;
     connection.query(sql, (err, data) => {
         if (err) throw err;
