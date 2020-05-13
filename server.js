@@ -40,7 +40,7 @@ connection.connect((err) => {
     console.log(`connection as id ${connection.threadId}`);
 });
 
-app.get("/cakes", (req, res) => {
+app.get("/", (req, res) => {
     const sql = "select * from cakes;"
     connection.query(sql, (err, data) => {
         if (err) throw err;
@@ -80,5 +80,5 @@ app.post('/order', function (req, res) {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is listening on: http://localhost: ${PORT}`);
+    console.log("Server is listening on: http://localhost:" + PORT);
 });
