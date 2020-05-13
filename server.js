@@ -48,11 +48,12 @@ app.get("/cakes", (req, res) => {
     });
 });
 
-app.get("/cakes/:route", (req, res) => {
+app.get("/cakes/:cakeName", (req, res) => {
     const sql = `select * from cakes where route="${req.params.cakeName}"`;
     connection.query(sql, (err, data) => {
-        if (err) throw err;
-        res.render("cake-name", data);
+        if (err)
+            throw err;
+        res.render("cake-name", data[0]);
     });
 });
 
@@ -71,7 +72,7 @@ app.post('/order', function (req, res) {
     connection.query(sql, [allId], (err, data) => {
         if (err) throw err;
         data.forEach(cake => {
-            cake.quantity = cart[cake].quantity;
+            cake.quantity = cart[cake.id].quantity;
             cake.total = cake.quantity * cake.price;
             cake.comment = cart[cake.id].comment;
         });
