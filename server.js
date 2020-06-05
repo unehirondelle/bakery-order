@@ -23,14 +23,19 @@ app.engine("handlebars", exprhnlbs({defaultLayout: "main"}));
 //firstArg: lets express know the view engine is set
 //secondArg: sets the view engine as a handlebars
 app.set("view engine", "handlebars");
+let connection;
 
-const connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: process.env.DB_PASSWORD,
-    database: "cakes_db"
-});
+if (process.env.JAWSDB_URL) {
+    connection = mysql.createConnection(process.env.JAWSDB_URL)
+} else {
+    connection = mysql.createConnection({
+        host: "localhost",
+        port: 3306,
+        user: "root",
+        password: process.env.DB_PASSWORD,
+        database: "cakes_db"
+    });
+}
 
 connection.connect((err) => {
     if (err) {
